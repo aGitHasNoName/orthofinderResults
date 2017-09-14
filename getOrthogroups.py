@@ -21,20 +21,21 @@ def checkForDups():
 		GOIList={columns[1] for columns in csv.reader(f)}
 		dupNamesList=[]
 		dupGOIList=[]
-	if l(GOInamesList) =! l(set(GOInamesList)):
+	if len(GOInamesList) != len(set(GOInamesList)):
 		print("Duplicate gene names:")
 		dupNamesList=[i for i in GOInamesList if GOInamesList.count(i)>1]
 		print(dupNamesList)
-	if l(GOIList) =! l(set(GOIList)):
+	if len(GOIList) != len(set(GOIList)):
 		print("Duplicate genes:")
 		dupGOIList=[i for i in GOIList if GOIList.count(i)>1]
 		print(dupGOIList)
-	if l(dupNamesList)>1:
+	if len(dupNamesList)>1:
 		sys.exit()
-	if l(dupGOIList)>1:
+	if len(dupGOIList)>1:
 		sys.exit()
 
 def getOrthoNames():
+	print("Getting Orthofinder gene names from species dictionary...")
 	with open(sys.argv[1], "r") as f:
 		GOIdict={columns[0]:columns[1] for columns in csv.reader(f)}
 	GOIdict2={}
@@ -50,6 +51,7 @@ def getOrthoNames():
 
 ###still working on this section.
 def getOrthogroups(orthoNamesDict):
+	print ("Getting orthogroups...")
 	GOIdict3={}
 	with open(sys.argv[3],"r") as f:
 		for line in f:
@@ -60,6 +62,7 @@ def getOrthogroups(orthoNamesDict):
 
 	
 def main():
+	checkForDups()
 	GOIdict2=getOrthoNames()
 	GOIdict3=getOrthogroups(GOIdict2)
 ###this saves as dictionary. This what I want?
@@ -67,9 +70,6 @@ def main():
 		f.write(json.dumps(GOIdict3))
 
 main()
-	print getOrthogroups(GOIdict2)
 
-	
-print (main())
-		
+
 		
