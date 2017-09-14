@@ -18,11 +18,21 @@ def checkForDups():
 	print("Checking for GOI list for duplications...")
 	with open(sys.argv[1], "r") as f:
 		GOInamesList={columns[0] for columns in csv.reader(f)}
-		GOIlist={columns[1] for columns in csv.reader(f)}
+		GOIList={columns[1] for columns in csv.reader(f)}
+		dupNamesList=[]
+		dupGOIList=[]
 	if l(GOInamesList) =! l(set(GOInamesList)):
 		print("Duplicate gene names:")
-		dupNamesList=[i for i in ]
-
+		dupNamesList=[i for i in GOInamesList if GOInamesList.count(i)>1]
+		print(dupNamesList)
+	if l(GOIList) =! l(set(GOIList)):
+		print("Duplicate genes:")
+		dupGOIList=[i for i in GOIList if GOIList.count(i)>1]
+		print(dupGOIList)
+	if l(dupNamesList)>1:
+		sys.exit()
+	if l(dupGOIList)>1:
+		sys.exit()
 
 def getOrthoNames():
 	with open(sys.argv[1], "r") as f:
