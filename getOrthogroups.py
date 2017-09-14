@@ -14,6 +14,15 @@ import csv
 ###sys.argv[4] is the name you want your output file to be called.
 ##########################################
 
+def checkForDups():
+	print("Checking for GOI list for duplications...")
+	with open(sys.argv[1], "r") as f:
+		GOInamesList={columns[0] for columns in csv.reader(f)}
+		GOIlist={columns[1] for columns in csv.reader(f)}
+	if l(GOInamesList) =! l(set(GOInamesList)):
+		print("Duplicate gene names:")
+		dupNamesList=[i for i in ]
+
 
 def getOrthoNames():
 	with open(sys.argv[1], "r") as f:
