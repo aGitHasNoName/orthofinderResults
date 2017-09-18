@@ -79,7 +79,8 @@ def getOrthogroups(orthoNamesDict):
 	return GOIdict3
 
 def makeFoldersAndFiles(orthogroupsDict):
-		
+	###Folder named after gene, file in folder named gene.fa is fasta of all orthologs in group.
+	
 	
 	
 def main():
