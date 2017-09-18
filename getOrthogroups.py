@@ -29,9 +29,9 @@ def checkForDups():
 		print("Duplicate genes:")
 		dupGOIList=[i for i in GOIList if GOIList.count(i)>1]
 		print(dupGOIList)
-	if len(dupNamesList)>1:
+	if len(dupNamesList)>=1:
 		sys.exit()
-	if len(dupGOIList)>1:
+	if len(dupGOIList)>=1:
 		sys.exit()
 
 def getOrthoNames():
@@ -78,6 +78,9 @@ def getOrthogroups(orthoNamesDict):
 		print ("All GOIs found")
 	return GOIdict3
 
+def makeFoldersAndFiles(orthogroupsDict):
+		
+	
 	
 def main():
 	checkForDups()
@@ -86,6 +89,7 @@ def main():
 ###this saves as dictionary. This what I want?
 	with open (sys.argv[4], "w") as f:
 		f.write(json.dumps(GOIdict3))
+	makeFoldersAndFiles(GOIdict3)
 
 main()
 
