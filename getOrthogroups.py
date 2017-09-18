@@ -49,15 +49,19 @@ def getOrthoNames():
 	return GOIdict2
 					
 
-###still working on this section.
 def getOrthogroups(orthoNamesDict):
 	print ("Getting orthogroups...")
 	GOIdict3={}
 	with open(sys.argv[3],"r") as f:
 		for line in f:
+			###Next 4 lines ensure correct match (e.g. at1 won't match to at10)
+			lineDict={}
+			i=line.split()
+			k=i[0]
+			lineDict[k]=list(j for j in i[1:])
 			for key in orthoNamesDict.keys():
-				if orthoNamesDict[key] in line:
-					GOIdict3[key]=line.split()[0][0:-1]
+				if orthoNamesDict[key] in lineDict[k]:
+					GOIdict3[key]=k[0:-1]
 	return GOIdict3
 
 	
