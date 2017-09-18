@@ -46,8 +46,11 @@ def getOrthoNames():
 				for key,value in GOIdict.items():
 					if value in ATdict[k][1][0:-2]:
 						GOIdict2[key]=k
+	###Next 6 lines check that all GOIs were found. Doesn't quit, but tells you which genes weren't found.
 	if len(GOIdict)!=len(GOIdict2):
-		print ("Not all GOIs found")
+		print ("Not all GOIs found:")
+		notFoundDict={key:value for key,value in GOIdict.items() if key not in GOIdict2.keys()}
+		print ("Check for extra spaces, typos in GOI csv: "+notFoundDict)
 	else:
 		print ("All GOIs found")
 	return GOIdict2
@@ -66,6 +69,13 @@ def getOrthogroups(orthoNamesDict):
 			for key,value in orthoNamesDict.items():
 				if value in lineDict[k]:
 					GOIdict3[key]=k[0:-1]
+	###Next lines check that all GOIs were found.
+	if len(orthoNamesDict)!=len(GOIdict3):
+		print ("Not all GOIs found:")
+		notFoundDict={key:value for key,value in orthoNamesDict.items() if key not in GOIdict3.keys()}
+		print (notFoundDict)
+	else:
+		print ("All GOIs found")
 	return GOIdict3
 
 	
