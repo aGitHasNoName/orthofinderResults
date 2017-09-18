@@ -46,6 +46,10 @@ def getOrthoNames():
 				for key,value in GOIdict.items():
 					if value in ATdict[k][1][0:-2]:
 						GOIdict2[key]=k
+	if len(GOIdict)!=len(GOIdict2):
+		print ("Not all GOIs found")
+	else:
+		print ("All GOIs found")
 	return GOIdict2
 					
 
@@ -59,8 +63,8 @@ def getOrthogroups(orthoNamesDict):
 			i=line.split()
 			k=i[0]
 			lineDict[k]=list(j for j in i[1:])
-			for key in orthoNamesDict.keys():
-				if orthoNamesDict[key] in lineDict[k]:
+			for key,value in orthoNamesDict.items():
+				if value in lineDict[k]:
 					GOIdict3[key]=k[0:-1]
 	return GOIdict3
 
