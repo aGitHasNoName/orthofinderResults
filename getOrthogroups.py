@@ -13,7 +13,8 @@ from Bio import SeqIO
 ###sys.argv[1] is the GOI file in .csv
 ###sys.argv[2] is the JSON dictionary for the single species (here Arabidopsis)
 ###sys.argv[3] is the complete orthofinder orthogroups file in .txt
-###sys.argv[4] is the name you want your output file to be called.
+###sys.argv[4] is the name you want your GOI:orthogroup dictionary to be called
+###sys.argv[5] is the path to the folder where the GOI files should be made
 ##########################################
 
 def checkForDups():
@@ -81,8 +82,13 @@ def getOrthogroups(orthoNamesDict):
 	return GOIdict3
 
 def makeFoldersAndFiles(orthogroupsDict):
-	print ("Making folders and fasta files")
-	###Folder named after gene, file in folder named gene.fa is fasta of all orthologs in group.
+	print ("Making folders and fasta files...")
+	for key in orthogroupsDict.keys():
+		dirPath=(sys.argv[5]+"/"+key)
+		if not os.path.exists(dirPath):
+    		os.makedirs(dirPath)
+    	
+	###file in folder named gene.fa is fasta of all orthologs in group.
 	
 	
 	
