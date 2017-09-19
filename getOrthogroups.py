@@ -84,6 +84,7 @@ def getOrthogroups(orthoNamesDict):
 
 
 def checkOrthogroupsForDups(orthogroupsDict):
+	print ("Checking for duplicate orthogroups and merging genes...")
 	groupDict={}
 	dupsDict={}
 	GOIdict4={}
