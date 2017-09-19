@@ -82,13 +82,14 @@ def getOrthogroups(orthoNamesDict):
 		print ("All GOIs found")
 	return GOIdict3
 
+###Split into two functions: makeFolders and makeFiles? But it's done, so maybe not.
 def makeFoldersAndFiles(orthogroupsDict):
 	print ("Making folders and fasta files...")
 	for key in orthogroupsDict.keys():
 		dirPath="{}/{}".format(sys.argv[5],key)
 		if not os.path.exists(dirPath):
-    		os.makedirs(dirPath)
-    	writeFile=open("{}/{}.fa".format(dirPath,key),"w")
+			os.makedirs(dirPath)
+		writeFile=open("{}/{}.fa".format(dirPath,key),"w")
 		groupDict=orthogroupsDict[key]
 		for value in groupDict.values():
 			for ortholog in value:
