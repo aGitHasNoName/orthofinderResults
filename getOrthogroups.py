@@ -105,6 +105,7 @@ def checkOrthogroupsForDups(orthogroupsDict):
 		sampV=dupsDict[key][0]
 		newKey="_".join(dupsDict[key])
 		GOIdict4[newKey]=orthogroupsDict[sampV]
+	print ("{} unique orthogroups identified.".format(str(len(GOIdict4)))
 	return GOIdict4
 
 
