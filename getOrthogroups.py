@@ -1,6 +1,8 @@
 import sys
 import json
 import csv
+import os
+from Bio import SeqIO
 
 ##########################################
 ##This script takes a .csv file with Genes of Interest and the corresponding
@@ -79,6 +81,7 @@ def getOrthogroups(orthoNamesDict):
 	return GOIdict3
 
 def makeFoldersAndFiles(orthogroupsDict):
+	print ("Making folders and fasta files")
 	###Folder named after gene, file in folder named gene.fa is fasta of all orthologs in group.
 	
 	
