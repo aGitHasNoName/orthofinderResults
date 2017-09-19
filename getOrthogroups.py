@@ -15,6 +15,7 @@ from Bio import SeqIO
 ###sys.argv[3] is the complete orthofinder orthogroups file in .txt
 ###sys.argv[4] is the name you want your GOI:orthogroup dictionary to be called
 ###sys.argv[5] is the path to the folder where the GOI files should be made
+###sys.argv[6] is the path to the folder with the full genomes
 ##########################################
 
 def checkForDups():
@@ -84,11 +85,20 @@ def getOrthogroups(orthoNamesDict):
 def makeFoldersAndFiles(orthogroupsDict):
 	print ("Making folders and fasta files...")
 	for key in orthogroupsDict.keys():
-		dirPath=(sys.argv[5]+"/"+key)
+		dirPath="{}/{}".format(sys.argv[5],key)
 		if not os.path.exists(dirPath):
     		os.makedirs(dirPath)
-		
-	
+    	writeFile=open("{}/{}.fa".format(dirPath,key),"w")
+		groupDict=orthogroupsDict[key]
+		for value in groupDict.values():
+			for ortholog in value:
+				species="".join([c for c in ortholog if c.isalpha()])
+				with open("{}/{}.fa".format(sys.argv[6],species), "r") as f:
+					for record in SeqIO.parse(f, "fasta"):
+						if ortholog==record.id:
+							SeqIO.write(record,writeFile,"fasta")
+		writeFile.close()
+							
 	
 	
 def main():
