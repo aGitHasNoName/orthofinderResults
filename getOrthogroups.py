@@ -82,6 +82,31 @@ def getOrthogroups(orthoNamesDict):
 		print ("All GOIs found")
 	return GOIdict3
 
+
+def checkOrthogroupsForDups(orthogroupsDict):
+	groupDict={}
+	dupsDict={}
+	GOIdict4={}
+	for key,value in orthogroupsDict.items():
+		for i in value.keys():
+			if i not in groupDict.keys():
+				groupDict[i]=[key]
+			else:
+				groupDict[i].append(key)
+	for key,value in groupDict.items():
+		if len(value) > 1:
+			dupsDict[key]=value
+	for key,value in orthogroupsDict.items():
+		for k in value.keys():
+			if k not in dupsDict.keys():
+				GOIdict4[key]=value
+	for key in dupsDict.keys():
+		sampV=dupsDict[key][0]
+		newKey="_".join(dupsDict[key])
+		GOIdict4[newKey]=orthogroupsDict[sampV]
+	return GOIdict4
+
+
 ###Split into two functions: makeFolders and makeFiles? But it's done, so maybe not.
 def makeFoldersAndFiles(orthogroupsDict):
 	print ("Making folders and fasta files...")
@@ -100,16 +125,17 @@ def makeFoldersAndFiles(orthogroupsDict):
 							SeqIO.write(record,writeFile,"fasta")
 		writeFile.close()
 							
-	
+
 	
 def main():
 	checkForDups()
 	GOIdict2=getOrthoNames()
 	GOIdict3=getOrthogroups(GOIdict2)
-###this saves as dictionary. This what I want?
+	GOIdict4=checkOrthogroupsForDups(GOIdict3)
+	###this saves as dictionary. This what I want?
 	with open (sys.argv[4], "w") as f:
-		f.write(json.dumps(GOIdict3))
-	makeFoldersAndFiles(GOIdict3)
+		f.write(json.dumps(GOIdict4))
+	makeFoldersAndFiles(GOIdict4)
 
 main()
 
