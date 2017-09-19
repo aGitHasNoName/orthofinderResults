@@ -67,11 +67,11 @@ def getOrthogroups(orthoNamesDict):
 			###Next 4 lines ensure correct match (e.g. at1 won't match to at10)
 			lineDict={}
 			i=line.split()
-			k=i[0]
+			k=i[0][0:-1]
 			lineDict[k]=list(j for j in i[1:])
 			for key,value in orthoNamesDict.items():
 				if value in lineDict[k]:
-					GOIdict3[key]=k[0:-1]
+					GOIdict3[key]=lineDict
 	###Next lines check that all GOIs were found.
 	if len(orthoNamesDict)!=len(GOIdict3):
 		print ("Not all GOIs found:")
@@ -87,8 +87,7 @@ def makeFoldersAndFiles(orthogroupsDict):
 		dirPath=(sys.argv[5]+"/"+key)
 		if not os.path.exists(dirPath):
     		os.makedirs(dirPath)
-    	
-	###file in folder named gene.fa is fasta of all orthologs in group.
+		
 	
 	
 	
