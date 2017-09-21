@@ -134,7 +134,6 @@ def main():
 	GOIdict2=getOrthoNames()
 	GOIdict3=getOrthogroups(GOIdict2)
 	GOIdict4=checkOrthogroupsForDups(GOIdict3)
-	###this saves as dictionary. This what I want?
 	with open (sys.argv[4], "w") as f:
 		f.write(json.dumps(GOIdict4))
 	makeFoldersAndFiles(GOIdict4)
