@@ -15,7 +15,7 @@ with open(sys.argv[2],"r") as f:
 
 output=open(sys.argv[3],"w")
 writer = csv.writer(output)
-header=species_list
+header=[line.split("\t")[0].rstrip("\n") for line in open(sys.argv[1],"r")]
 header.insert(0,"gene")
 header.insert(0, "orthogroup")
 writer.writerow(header)
@@ -28,7 +28,7 @@ for key,value in ortho_dict.items():
 		row=list(map(lambda x: copies.count(x),species_list))
 		row.insert(0,gene)
 		row.insert(0,key)
-	    writer.writerow(row)
-    
+		writer.writerow(row)
+
 output.close()
 		
