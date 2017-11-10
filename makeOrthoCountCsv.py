@@ -7,7 +7,7 @@ import csv
 ###sys.argv[2] is orthogroup dictionary
 ###sys.argv[3] is name for output csv file
 
-species_list=[line.rstrip() for line in open(sys.argv[1],"r")]
+species_list=[line.split()[0] for line in open(sys.argv[1],"r")]
 ortho_dict=json.loads(sys.argv[2])
 
 output=open(sys.argv[3],"wb")
